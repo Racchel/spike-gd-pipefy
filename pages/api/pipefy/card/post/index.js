@@ -1,5 +1,5 @@
 import Cors from "cors";
-const cors = Cors({ methods: ["GET", "OPTIONS"] });
+const cors = Cors({ methods: ["POST", "OPTIONS"] });
 
 import initMiddleware from "../../../../../src/utils/middleware";
 import { CREATE_NEW_CARD_BY_PIPE_ID } from "../../queries";
@@ -9,21 +9,23 @@ import { gql } from "@apollo/client";
 
 export default async function handler(req, res) {
   await initMiddleware(req, res, cors);
+  const { pipeId } = req.query;
+  const { title, category, orderId, description, user } = req.body;
 
   try {
 
-    if (req.method !== "GET") {
+    if (req.method !== "POST") {
       return res.status(405).json({ message: "Method Not Allowed" });
     }
 
     const cardProps = {
-      pipeId: 303335871,
-      title: "Meuu carddd",
+      pipeId: pipeId,
+      title: title,
       fieldAttributes:[
-        {field_id: "requisitado_por", field_value: "728799370"},
-        {field_id: "categoria", field_value: "Rede"},
-        {field_id: "descri_o_do_incidente", field_value: "Deu PT"},
-        {field_id: "id_do_pedido", field_value: "0909"},
+        {field_id: "requisitado_por", field_value: user},
+        {field_id: "categoria", field_value: category},
+        {field_id: "descri_o_do_incidente", field_value: description},
+        {field_id: "id_do_pedido", field_value: orderId},
       ]
     }
 

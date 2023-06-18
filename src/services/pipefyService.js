@@ -1,5 +1,7 @@
 import { api } from "./baseApi";
 
+const PIPE_ID = 303335871
+
 export const pipefyService = {
   auth: async () => {
     try {
@@ -9,7 +11,7 @@ export const pipefyService = {
       return error;
     }
   },
-  getAllCards: async (pipeId="303335871") => {
+  getAllCards: async (pipeId=PIPE_ID) => {
     try {
       const response = await api.get(`api/pipefy/card/get?pipeId=${pipeId}`);
       return response.data;
@@ -17,7 +19,7 @@ export const pipefyService = {
       return error;
     }
   },
-  getCardByOrderId: async (pipeId="303335871", orderId="5678") => {
+  getCardByOrderId: async (pipeId=PIPE_ID, orderId="5678") => {
     try {
       const response = await api.get(`api/pipefy/card/get/byOrderId?pipeId=${pipeId}&orderId=${orderId}`);
       return response.data;
@@ -25,9 +27,15 @@ export const pipefyService = {
       return error;
     }
   },
-  createNewCard: async (pipeId="303335871") => {
+  createNewCard: async (pipeId=PIPE_ID) => {
     try {
-      const response = await api.get(`api/pipefy/card/post?pipeId=${pipeId}`);
+      const response = await api.post(`api/pipefy/card/post?pipeId=${pipeId}`, {
+        title: "New Title",
+        category: "Rede",
+        orderId: "0909",
+        description: "Minha descrição",
+        user: "728799370"
+      });
       return response.data;
     } catch (error) {
       return error;
