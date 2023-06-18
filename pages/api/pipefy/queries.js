@@ -80,16 +80,12 @@ query {
  * {"data":{"createCard":{"card":{"title":"New card"}}}}
  */
 export const CREATE_NEW_CARD_BY_PIPE_ID = ` 
-mutation {
+mutation CreateCard($pipeId: ID!, $title: String!, $fieldAttributes: [FieldValueInput!]!) {
   createCard(input: {
-    pipe_id: 303335871,
-    title: "New card",
-    fields_attributes:[
-      {field_id: "requisitado_por", field_value: "728799370"},
-      {field_id: "categoria", field_value: "Rede"},
-      {field_id: "descri_o_do_incidente", field_value: "Deu PT"},
-    ]}
-  ) {
+    pipe_id: $pipeId,
+    title: $title,
+    fields_attributes: $fieldAttributes
+  }) {
     card {
       title
     }
