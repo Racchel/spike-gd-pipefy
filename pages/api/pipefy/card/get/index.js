@@ -16,7 +16,14 @@ export default async function handler(req, res) {
       return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    const response = await apolloClient.query({ query: gql`${GET_ALL_CARD_IDS_BY_PIPE_ID}`})
+    const options = {
+      query: gql`${GET_ALL_CARD_IDS_BY_PIPE_ID}`,
+      variables: {
+        cardId: "303335871",
+      }
+    }
+
+    const response = await apolloClient.query(options)
 
     const data = response.data.cards.edges.map(card => card.node.id )
 
