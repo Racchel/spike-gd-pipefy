@@ -9,9 +9,9 @@ export const pipefyService = {
       return error;
     }
   },
-  getAllCards: async () => {
+  getAllCards: async (pipeId="303335871") => {
     try {
-      const response = await api.get(`api/pipefy/card/get`);
+      const response = await api.get(`api/pipefy/card/get?pipeId=${pipeId}`);
       return response.data;
     } catch (error) {
       return error;

@@ -9,6 +9,7 @@ import { gql } from "@apollo/client";
 
 export default async function handler(req, res) {
   await initMiddleware(req, res, cors);
+  const { pipeId } = req.query;
 
   try {
 
@@ -19,7 +20,7 @@ export default async function handler(req, res) {
     const options = {
       query: gql`${GET_ALL_CARD_IDS_BY_PIPE_ID}`,
       variables: {
-        cardId: "303335871",
+        pipeId: String(pipeId),
       }
     }
 

@@ -285,8 +285,8 @@ query MyQuery {
  * {"node":{"id":"728800313"}}]}}}
  */
 export const GET_ALL_CARD_IDS_BY_PIPE_ID = `
-query MyQuery($cardId: ID!) {
-  cards(pipe_id: $cardId) {
+query MyQuery($pipeId: ID!) {
+  cards(pipe_id: $pipeId) {
     edges {
       node {
         id
