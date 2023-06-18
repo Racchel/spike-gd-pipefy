@@ -11,7 +11,7 @@ export default function Home() {
 
   const getAllCards = async () => {
     await auth()
-    const response = await pipefyService.getAllCards()
+    const response = await pipefyService.getCardByOrderId()
     console.log("getAllCards", response)
     return response
   }

@@ -17,6 +17,14 @@ export const pipefyService = {
       return error;
     }
   },
+  getCardByOrderId: async (pipeId="303335871", orderId="5678") => {
+    try {
+      const response = await api.get(`api/pipefy/card/get/byOrderId?pipeId=${pipeId}&orderId=${orderId}`);
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  },
   getCardById: async () => {
     try {
       const response = await api.get(`api/pipefy/card/get/byId`);

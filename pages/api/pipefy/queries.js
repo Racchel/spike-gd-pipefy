@@ -153,6 +153,38 @@ query {
 }
 `
 
+export const SEARCH_CARD_BY_ORDER_ID_AND_PIPE_ID = `
+query searchCardByOrderIdAndPipeId($pipeId: ID!, $orderId: String!){
+  findCards(pipeId: $pipeId, search: {fieldId: "id_do_pedido", fieldValue: $orderId}) {
+    edges {
+      node {
+        id
+        title
+        done
+        updated_at
+        current_phase {
+          name
+        }
+        pipe {
+          name
+        }
+        fields {
+          name
+          value
+        }
+        assignees {
+          name
+          email
+        }
+        attachments {
+          url
+          path
+        }
+      }
+    }
+  }
+}
+`
 /**
  * {"data":{"pipe":{"start_form_fields":[
  * {"id":"n_mero_do_incidente","label":"Número do Incidente","custom_validation":"","options":[],"help":"","minimal_view":false,"is_multiple":false,"index_name":"field_52_string","internal_id":"355658807","index":-100,"editable":false,"description":"🤖 Gerado automaticamente. Formatos Customizados podem ser atribuídos via API.","connected_repo":null,"connectedRepo":null,"childMustExistToFinishParent":false,"canCreateNewConnected":true,"canConnectExisting":false,"canConnectMultiples":true,"allChildrenMustBeDoneToMoveParent":false,"allChildrenMustBeDoneToFinishParent":false},
@@ -186,6 +218,17 @@ query {
       canConnectMultiples
       allChildrenMustBeDoneToMoveParent
       allChildrenMustBeDoneToFinishParent
+    }
+  }
+}
+`
+
+export const GET_START_FORM_FIELDS_BY_PIPE_ID_SIMPLES = `
+query {
+  pipe(id: 303335871) {
+    start_form_fields {
+      id
+      label
     }
   }
 }
